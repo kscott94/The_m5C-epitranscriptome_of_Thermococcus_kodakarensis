@@ -2,10 +2,10 @@
 
 Kristin A. Fluke1, Ryan T. Fuchs2, Yueh-Lin Tsai2, Victoria Talbott1, Liam Elkins3, Hallie P. Febvre3, Nan Dai2, Eric J. Wolf2, Jackson Schiltz3, G. Brett Robb2, Ivan R. Correa2, Thomas J. Santangelo1,3,4
 
-1 Cell and Molecular Biology Graduate Program, Colorado State University, Fort Collins, CO, United States, 80523/
+1 Cell and Molecular Biology Graduate Program, Colorado State University, Fort Collins, CO, United States, 80523
 
-2 New England Biolabs Inc., Beverly, Massachusetts, United States, 01915/
+2 New England Biolabs Inc., Beverly, Massachusetts, United States, 01915
 
-3 Department of Biochemistry and Molecular Biology, Colorado State University, Fort Collins, CO, United States, 80523/
+3 Department of Biochemistry and Molecular Biology, Colorado State University, Fort Collins, CO, United States, 80523
 
-4 Correspondence: thomas.santangelo@colostate.edu/
+4 Correspondence: thomas.santangelo@colostate.edu
