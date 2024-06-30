@@ -2,14 +2,14 @@ import pandas as pd
 import helpers as hp
 
 if __name__ == "__main__":
-    #in/out: line separated file of TS559 positions
-    #index_path = './supporting_data/unit_test_positions.lsv'
+    # input: line separated file of TS559 genomic positions
+    # index_path = './supporting_data/unit_test_positions.lsv'
     index_path = './supporting_data/m5C_positions.lsv'
 
-    #Name if output file, default: annotation_ready.tsv
+    # Name of output file, default: annotation_ready.tsv
     outfile_name = 'annotation_ready.tsv'
 
-    #Supporting files to help with annotations (auxillary files = 7)
+    # Supporting files to help with annotations (auxillary files = 7)
     TS559_genome_path = './supporting_data/TS559_reference_genome.fasta'
     KOD1_genome_path = './supporting_data/KOD1_reference_genome.fasta'
     annotation_path = './supporting_data/TS559_annotations.gtf'
@@ -18,6 +18,7 @@ if __name__ == "__main__":
     TSS_TS559_positions_path ='./supporting_data/TSSs_TS559.tsv'
     RNA_folds_path = "./supporting_data/Tko_allgenes_85C_fold.tsv"
 
+    # Initialize dictionary to be polulated
     final_dict = {"TS559_position": [],
                   "KOD1_position": [],
                   "strand" : [],
@@ -42,16 +43,16 @@ if __name__ == "__main__":
                   "alternate_annotations": []
                   }
 
-    #Load reference genomes into memory
+    # Load reference genomes into memory
     TS559_genome_sequence = hp.load_genome(TS559_genome_path)
     KOD1_genome_sequence = hp.load_genome(KOD1_genome_path)
 
-    #Initiate dictionary for gene lengths
+    # Initiate dictionary for gene lengths
     gene_lens = {}
     gene_start = {}
     gene_stop = {}
 
-    #Create dataframe with annotation files
+    # Create dataframe with annotation files
     annotation_cols = ['chromosome', 'method', 'element', 'start', 'stop', 'dot', 'strand','zero', 'descriptors']
     annotation_df = pd.read_csv(annotation_path, sep='\t', header = None, names=annotation_cols)
 
@@ -63,7 +64,7 @@ if __name__ == "__main__":
     rna_folds_df = pd.read_csv(RNA_folds_path, sep='\t', header = None,
                          names=["gene_id","MFE","RNA_predicted_fold"])
 
-    #populate gene_lens dictionary
+    # Populate gene_lens dictionary
     for index, row in annotation_df.iterrows():
         element_type = row['element']
         descriptions = hp.get_descript(row['descriptors'])
@@ -298,9 +299,6 @@ if __name__ == "__main__":
             final_dict['TSS_direction'].append(promoter_direction)
             final_dict['TSS_description'].append(promoter_description)
 
-
+    # Print data to csv file
     df = pd.DataFrame(final_dict)
-    print(df)
-
-
     df.to_csv(outfile_name, sep = '\t', index=False)
