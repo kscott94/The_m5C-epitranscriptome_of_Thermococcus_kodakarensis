@@ -15,7 +15,7 @@ def load_genome(path):
 
 def rev_comp(seq, type, convert = True):
     """
-    You geussed it. Reverse complement an RNA or DNA sequence.
+    You guessed it. Reverse complement an RNA or DNA sequence.
     :param seq: RNA or DNA sequence (A,T,U,C,G)
     :param type: input is RNA or DNA
     :param convert: if you want output rev comp sequene to be converted to RNA or DNA (which ever is opposite of input)
