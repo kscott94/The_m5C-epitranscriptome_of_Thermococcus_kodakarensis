@@ -2,7 +2,7 @@ def load_genome(path):
     """
     This function takes a genome in fasta format and converts it to a string.
     Note, only one fasta sequence per file.
-    :param path: path to reference genome in fasta file
+    :param path: str, path to reference genome in fasta file
     :return: str, 1-based genomic sequence
     """
     with open(path, 'r') as genome:
@@ -16,10 +16,11 @@ def load_genome(path):
 def rev_comp(seq, type, convert = True):
     """
     You guessed it. Reverse complement an RNA or DNA sequence.
-    :param seq: RNA or DNA sequence (A,T,U,C,G)
-    :param type: input is RNA or DNA
-    :param convert: if you want output rev comp sequene to be converted to RNA or DNA (which ever is opposite of input)
-    :return: str
+    :param seq: str, RNA or DNA sequence (A,T,U,C,G)
+    :param type: str, input is RNA or DNA
+    :param convert: bool, if you want output rev comp sequene to be converted to RNA or DNA 
+        (which ever is opposite of input). default=True
+    :return: str, reverse complimented nucleotide sequence
     """
     seq = seq.upper()
     type = type.upper()
@@ -39,9 +40,9 @@ def rev_comp(seq, type, convert = True):
 def convert(seq, type):
     """
     Convert DNA to RNA or vise versa
-    :param seq: nucleotide sequence (A,T,U,C,G)
-    :param type: input is DNA or RNA
-    :return: str
+    :param seq: str, nucleotide sequence (A,T,U,C,G)
+    :param type: str, input is DNA or RNA
+    :return: str, nucleotide sequence
     """
     seq = seq.upper()
     type = type.upper()
@@ -56,8 +57,8 @@ def convert(seq, type):
 def ref_strand(nuc):
     """
     Determine if the strand is + ir -
-    :param nuc: C or G
-    :return: + or -
+    :param nuc: str, C or G
+    :return: str, + or -
     """
     #nuc: C or G
     nuc=nuc.upper()
@@ -72,9 +73,9 @@ def ref_strand(nuc):
 
 def get_descript(description):
     """
-    Make a dictionary of tags in annotation file where the attribute is the key and the value is the... value
-    :param description: description line in annotation file.
-    :return: dictionary of key/value pairs of tags in annotation description
+    Make a dictionary of tags in annotation file where the attribute is the key and the value remains the value.
+    :param description: str, description line in annotation file.
+    :return: dict, dictionary of key/value pairs of tags in annotation description
     """
     desc_dict = {}
     ls = description.split(";")
@@ -87,8 +88,8 @@ def get_descript(description):
 def codon_pos(pos):
     """
     Get the codon position (1,2, or 3) from the position in transcript
-    :param pos: position from start of transcript
-    :return: codon position
+    :param pos: int, position from start of transcript
+    :return: int, codon position
     """
     if pos % 3 == 1:
         return 1
@@ -100,13 +101,13 @@ def codon_pos(pos):
         return 'NaN'
 
 
-def codon_seq(codon_pos, surroudning_seq):
+def codon_seq(codon_pos, surrounding_seq):
     """
     Get codon sequence from 4 nucleotide context.
     position is 1,2, or 3
-    :param codon_pos: codon position is 1, 2, or 3
-    :param surroudning_seq: 2nt up and down stream plus the center position
-    :return: str
+    :param codon_pos: int, codon position is 1, 2, or 3
+    :param surroudning_seq: str, 5-nucleotide sequence (2 up and down stream plus the center position)
+    :return: str, 3-nucleotide codon sequence
     """
     aa_seq = str(surroudning_seq).replace("T", "U")
     if codon_pos == 1:
@@ -120,8 +121,8 @@ def codon_seq(codon_pos, surroudning_seq):
 def aa_id(aa_seq):
     """
     Get the amino acid one letter symbol (ID) from the 3-letter codon sequence
-    :param aa_seq: 3 letter codon sequence
-    :return: amino acid ID
+    :param aa_seq: str, 3 letter codon sequence
+    :return: str, amino acid ID
     """
     aa_seq = aa_seq.upper().replace("T","U")
     genecode = {
@@ -202,10 +203,10 @@ def ls_to_csv(ls):
 
 def get_KOD1_position(query, subject):
     """
-    Convert a genomic position in TS559 to that of KOD1
-    :param query: sequence to search
-    :param subject: KOD1 reference genome
-    :return: int coordinate position in KOD1 genome where query is found
+    Convert a genomic position in strain TS559 to that of strain KOD1
+    :param query: str, sequence to search
+    :param subject: str, KOD1 reference genome
+    :return: int, coordinate position in KOD1 genome where query is found
     """
     search_length = len(query)
     start_search = 1
@@ -229,9 +230,9 @@ def get_KOD1_position(query, subject):
 def convert_tag(tag, output='old_locus_tag'):
     """
     From new locus tag, get corresponding old locus tag or vise versa
-    :param tag: locus tag (i.e. "TK0001", or "TK_RS00370")
-    :param output: "old_locus_tag" (TK gene ID) or "locus_tag"
-    :return: str locus tag
+    :param tag: str, locus tag (i.e. "TK0001", or "TK_RS00370")
+    :param output: str, "old_locus_tag" (TK gene ID) or "locus_tag"
+    :return: str, locus tag
     """
     dict = {
         "TK_RS00370": "TK_RS00370", "TK_RS02665": "TK_RS02665", "TK_RS11710": "TK_RS11710", "TK_RS11730": "TK_RS11730",
@@ -368,4 +369,4 @@ def convert_tag(tag, output='old_locus_tag'):
         for locus_tag, TKid in dict.items():  # for name, age in dictionary.iteritems():  (for Python 2.x)
             if tag == TKid:
                 out_tag = locus_tag
-                return (out_tag)
+                return(out_tag)
