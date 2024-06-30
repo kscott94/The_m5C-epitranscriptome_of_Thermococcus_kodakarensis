@@ -2,8 +2,8 @@ def load_genome(path):
     """
     This function takes a genome in fasta format and converts it to a string.
     Note, only one fasta sequence per file.
-    :param path: path to fasta file
-    :return: str
+    :param path: path to reference genome in fasta file
+    :return: str, 1-based genomic sequence
     """
     with open(path, 'r') as genome:
         """remove fasta header"""
