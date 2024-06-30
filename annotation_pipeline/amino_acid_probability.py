@@ -4,17 +4,19 @@ import helpers as hp
 
 
 """
-Based on current annotations, calculate how many times each amino acid identity and codon sequence occur in the 
-T. kodakarensis TS559 reference genome. 
+Codon usage biase -- Calculate how many times each amino acid identity and codon sequence occur in the 
+T. kodakarensis strain TS559 reference genome.
 """
 
 if __name__ == "__main__":
-
-    TS559_genome_path = './supporting_data/TS559_reference_genome.fasta'
-
-    TS559_genome_sequence = hp.load_genome(TS559_genome_path)
+    
+    # Input paths to supporting data
     annotation_path = './supporting_data/TS559_annotations.gtf'
-
+    TS559_genome_path = './supporting_data/TS559_reference_genome.fasta'
+    
+    # Load Genome
+    TS559_genome_sequence = hp.load_genome(TS559_genome_path)
+    
     with open(annotation_path, "r") as f:
         all_aa_id = []
         all_aa_codons = []
